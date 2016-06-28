@@ -6541,6 +6541,10 @@ module.exports =
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _DragToResize = __webpack_require__(133);
+  
+  var _DragToResize2 = _interopRequireDefault(_DragToResize);
+  
   var _withStyles = __webpack_require__(4);
   
   var _withStyles2 = _interopRequireDefault(_withStyles);
@@ -6573,6 +6577,11 @@ module.exports =
           _react2.default.createElement(
             'div',
             { className: _SandboxPage2.default.container },
+            _react2.default.createElement(
+              _DragToResize2.default,
+              { className: 'box', h: 100, w: 100 },
+              _react2.default.createElement('div', { className: 'box' })
+            ),
             this.props.path === '/' ? null : _react2.default.createElement(
               'h1',
               null,
@@ -6643,6 +6652,279 @@ module.exports =
         module.hot.dispose(function() { removeCss(); });
       }
     
+
+/***/ },
+/* 133 */
+/***/ function(module, exports, __webpack_require__) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  
+  var _extends2 = __webpack_require__(100);
+  
+  var _extends3 = _interopRequireDefault(_extends2);
+  
+  var _objectWithoutProperties2 = __webpack_require__(101);
+  
+  var _objectWithoutProperties3 = _interopRequireDefault(_objectWithoutProperties2);
+  
+  var _getPrototypeOf = __webpack_require__(8);
+  
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+  
+  var _classCallCheck2 = __webpack_require__(9);
+  
+  var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+  
+  var _createClass2 = __webpack_require__(10);
+  
+  var _createClass3 = _interopRequireDefault(_createClass2);
+  
+  var _possibleConstructorReturn2 = __webpack_require__(12);
+  
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+  
+  var _inherits2 = __webpack_require__(11);
+  
+  var _inherits3 = _interopRequireDefault(_inherits2);
+  
+  var _react = __webpack_require__(1);
+  
+  var _react2 = _interopRequireDefault(_react);
+  
+  var _reactDraggable = __webpack_require__(135);
+  
+  var _DOMUtils = __webpack_require__(134);
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  
+  var DragToResize = function (_React$Component) {
+    (0, _inherits3.default)(DragToResize, _React$Component);
+  
+    function DragToResize() {
+      var _Object$getPrototypeO;
+  
+      var _temp, _this, _ret;
+  
+      (0, _classCallCheck3.default)(this, DragToResize);
+  
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+  
+      return _ret = (_temp = (_this = (0, _possibleConstructorReturn3.default)(this, (_Object$getPrototypeO = (0, _getPrototypeOf2.default)(DragToResize)).call.apply(_Object$getPrototypeO, [this].concat(args))), _this), _this.state = {
+  
+        isResizing: false,
+        w: _this.props.w,
+        h: _this.props.h,
+        missingW: 0,
+        missingH: 0
+  
+      }, _temp), (0, _possibleConstructorReturn3.default)(_this, _ret);
+    }
+  
+    (0, _createClass3.default)(DragToResize, [{
+      key: 'propsSizeChanged',
+  
+  
+      //
+      // help
+      //
+  
+      value: function propsSizeChanged(next) {
+        return next.props.w !== this.props.w || next.props.h !== this.props.h;
+      }
+    }, {
+      key: 'onResize',
+      value: function onResize(eventName) {
+        var _this2 = this;
+  
+        return;
+        (function (e, _ref) {
+          var node = _ref.node;
+          var dX = _ref.dX;
+          var dY = _ref.dY;
+  
+          var w = _this2.state.w + dX;
+          var h = _this2.state.h + dY;
+          var deltaW = Math.abs(w - _this2.state.w);
+          var deltaH = Math.abs(h - _this2.state.h);
+  
+          if (eventName === 'resizing' && deltaW === 0 && deltaH === 0) return;
+  
+          var next = {};
+          var whichCallback = '';
+  
+          switch (eventName) {
+            case 'start':
+              next.isResizing = true;
+              whichCallback = 'onResizeStart';
+              break;
+            case 'stop':
+              next.isResizing = false;
+              whichCallback = 'onResizeStop';
+              break;
+            default:
+              next.w = w;
+              next.h = h;
+              whichCallback = 'onResize';
+              break;
+          }
+  
+          _this2.setState(next, function () {
+            _this2.props[whichCallback] && _this2.props[whichCallback](e, { node: node, size: { w: w, h: h } });
+          });
+        });
+      }
+  
+      //
+      // lifecycle of component
+      //
+  
+    }, {
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(next) {
+        if (!this.state.isResizing && this.propsSizeChanged(next)) {
+          this.setState({
+            w: next.w,
+            h: next.h
+          });
+        }
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        var _props = this.props;
+        var w = _props.w;
+        var h = _props.h;
+        var P = (0, _objectWithoutProperties3.default)(_props, ['w', 'h']);
+  
+        var clazz = P.className ? P.className + ' drag-to-resize' : 'drag-to-resize';
+  
+        return (0, _DOMUtils.deepCopyElementWithStyleAndClassNameAndProps)(P.children, (0, _extends3.default)({}, P, {
+  
+          clazz: clazz,
+  
+          children: [P.children.props.children, _react2.default.createElement(
+            _reactDraggable.DraggableCore,
+            {
+              key: 'dragToResizeNotch',
+              ref: 'draggable',
+              onStop: this.onResize('stop'),
+              onStart: this.onResize('start'),
+              onDrag: this.onResize('resizing')
+            },
+            _react2.default.createElement('span', { className: 'react-resizable-handle' })
+          )]
+  
+        }));
+      }
+    }]);
+    return DragToResize;
+  }(_react2.default.Component);
+  
+  DragToResize.propTypes = {
+  
+    // @required
+  
+    w: _react.PropTypes.number.isRequired,
+    h: _react.PropTypes.number.isRequired,
+  
+    children: _react.PropTypes.element.isRequired,
+  
+    // @optional
+  
+    onResizeStart: _react.PropTypes.func,
+    onResizeStop: _react.PropTypes.func,
+    onResizing: _react.PropTypes.func,
+  
+    // no effect yet
+    // TODO: make it do something later
+  
+    minSize: _react.PropTypes.object,
+    maxSize: _react.PropTypes.object,
+  
+    constrainAspectRatio: _react.PropTypes.boolean
+  
+  };
+  DragToResize.defaultProps = {
+  
+    minSize: {
+      w: 10,
+      h: 10
+    },
+  
+    maxSize: {
+      w: Infinity,
+      h: Infinity
+    },
+  
+    constrainAspectRatio: true
+  
+  };
+  exports.default = DragToResize;
+
+/***/ },
+/* 134 */
+/***/ function(module, exports, __webpack_require__) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  
+  var _extends2 = __webpack_require__(100);
+  
+  var _extends3 = _interopRequireDefault(_extends2);
+  
+  exports.addEventListener = addEventListener;
+  exports.removeEventListener = removeEventListener;
+  exports.deepCopyElementWithStyleAndClassNameAndProps = deepCopyElementWithStyleAndClassNameAndProps;
+  
+  var _react = __webpack_require__(1);
+  
+  var _react2 = _interopRequireDefault(_react);
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  
+  function addEventListener(node, event, listener) {
+    if (node.addEventListener) {
+      node.addEventListener(event, listener, false);
+    } else {
+      node.attachEvent('on' + event, listener);
+    }
+  }
+  
+  function removeEventListener(node, event, listener) {
+    if (node.removeEventListener) {
+      node.removeEventListener(event, listener, false);
+    } else {
+      node.detachEvent('on' + event, listener);
+    }
+  }
+  
+  function deepCopyElementWithStyleAndClassNameAndProps(element, P) {
+  
+    if (P.style && element.props.style) {
+      P.style = (0, _extends3.default)({}, element.props.style, P.style);
+    }
+  
+    if (P.className && element.props.className) {
+      P.className = element.props.className + ' ' + P.className;
+    }
+  
+    return _react2.default.cloneElement(element, P);
+  }
+
+/***/ },
+/* 135 */
+/***/ function(module, exports) {
+
+  module.exports = require("react-draggable");
 
 /***/ }
 /******/ ]);

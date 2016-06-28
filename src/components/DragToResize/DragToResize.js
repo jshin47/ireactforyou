@@ -162,7 +162,7 @@ export default class DragToResize extends React.Component {
             onStart={this.onResize('start')}
             onDrag={this.onResize('resizing')}
           >
-
+            <span className="react-resizable-handle" />
 
 
           </DraggableCore>
