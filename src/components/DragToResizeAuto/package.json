@@ -1,0 +1,6 @@
+{
+  "name": "DragToResizeAuto",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./DragToResizeAuto.js"
+}

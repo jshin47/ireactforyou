@@ -3267,14 +3267,14 @@ module.exports =
   
   function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
   
-  var routes = [__webpack_require__(51), __webpack_require__(49), __webpack_require__(53), __webpack_require__(55)]; /**
-                                                                                                                                  * React Starter Kit (https://www.reactstarterkit.com/)
-                                                                                                                                  *
-                                                                                                                                  * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
-                                                                                                                                  *
-                                                                                                                                  * This source code is licensed under the MIT license found in the
-                                                                                                                                  * LICENSE.txt file in the root directory of this source tree.
-                                                                                                                                  */
+  var routes = [__webpack_require__(51), __webpack_require__(49), __webpack_require__(53), __webpack_require__(55), __webpack_require__(127)]; /**
+                                                                                                                                                               * React Starter Kit (https://www.reactstarterkit.com/)
+                                                                                                                                                               *
+                                                                                                                                                               * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
+                                                                                                                                                               *
+                                                                                                                                                               * This source code is licensed under the MIT license found in the
+                                                                                                                                                               * LICENSE.txt file in the root directory of this source tree.
+                                                                                                                                                               */
   
   var router = new _Router2.default(function (on) {
     on('*', function () {
@@ -6355,6 +6355,153 @@ module.exports =
 /***/ function(module, exports) {
 
   module.exports = require("react-dom/server");
+
+/***/ },
+/* 126 */
+/***/ function(module, exports, __webpack_require__) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  
+  var _react = __webpack_require__(1);
+  
+  var _react2 = _interopRequireDefault(_react);
+  
+  var _withStyles = __webpack_require__(4);
+  
+  var _withStyles2 = _interopRequireDefault(_withStyles);
+  
+  var _Sandbox = __webpack_require__(129);
+  
+  var _Sandbox2 = _interopRequireDefault(_Sandbox);
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  
+  function Sandbox(_ref) {
+    var title = _ref.title;
+  
+    return _react2.default.createElement(
+      'div',
+      { className: _Sandbox2.default.root },
+      _react2.default.createElement(
+        'div',
+        { className: _Sandbox2.default.container },
+        _react2.default.createElement(
+          'h1',
+          null,
+          title
+        )
+      )
+    );
+  }
+  
+  Sandbox.propTypes = { title: _react.PropTypes.string.isRequired };
+  
+  exports.default = (0, _withStyles2.default)(Sandbox, _Sandbox2.default);
+
+/***/ },
+/* 127 */
+/***/ function(module, exports, __webpack_require__) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  exports.action = exports.path = undefined;
+  
+  var _regenerator = __webpack_require__(6);
+  
+  var _regenerator2 = _interopRequireDefault(_regenerator);
+  
+  var _asyncToGenerator2 = __webpack_require__(5);
+  
+  var _asyncToGenerator3 = _interopRequireDefault(_asyncToGenerator2);
+  
+  var _react = __webpack_require__(1);
+  
+  var _react2 = _interopRequireDefault(_react);
+  
+  var _Sandbox = __webpack_require__(126);
+  
+  var _Sandbox2 = _interopRequireDefault(_Sandbox);
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  
+  var path = exports.path = '/sandbox';
+  var action = exports.action = function () {
+    var ref = (0, _asyncToGenerator3.default)(_regenerator2.default.mark(function _callee(state) {
+      var title;
+      return _regenerator2.default.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              title = 'Sandbox';
+  
+              state.context.onSetTitle(title);
+              return _context.abrupt('return', _react2.default.createElement(_Sandbox2.default, { title: title }));
+  
+            case 3:
+            case 'end':
+              return _context.stop();
+          }
+        }
+      }, _callee, undefined);
+    }));
+    return function action(_x) {
+      return ref.apply(this, arguments);
+    };
+  }();
+
+/***/ },
+/* 128 */
+/***/ function(module, exports, __webpack_require__) {
+
+  exports = module.exports = __webpack_require__(2)();
+  // imports
+  
+  
+  // module
+  exports.push([module.id, "", "", {"version":3,"sources":[],"names":[],"mappings":"","file":"Sandbox.scss","sourceRoot":"webpack://"}]);
+  
+  // exports
+
+
+/***/ },
+/* 129 */
+/***/ function(module, exports, __webpack_require__) {
+
+  
+      var content = __webpack_require__(128);
+      var insertCss = __webpack_require__(3);
+  
+      if (typeof content === 'string') {
+        content = [[module.id, content, '']];
+      }
+  
+      module.exports = content.locals || {};
+      module.exports._getCss = function() { return content.toString(); };
+      module.exports._insertCss = insertCss.bind(null, content);
+    
+      var removeCss = function() {};
+  
+      // Hot Module Replacement
+      // https://webpack.github.io/docs/hot-module-replacement
+      // Only activated in browser context
+      if (false) {
+        module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]!./../../../node_modules/postcss-loader/index.js?parser=postcss-scss!./Sandbox.scss", function() {
+          var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]!./../../../node_modules/postcss-loader/index.js?parser=postcss-scss!./Sandbox.scss");
+          if (typeof newContent === 'string') {
+            newContent = [[module.id, content, '']];
+          }
+          removeCss = insertCss(newContent, { replace: true });
+        });
+        module.hot.dispose(function() { removeCss(); });
+      }
+    
 
 /***/ }
 /******/ ]);

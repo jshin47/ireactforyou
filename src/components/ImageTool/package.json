@@ -1,0 +1,6 @@
+{
+  "name": "ImageTool",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./ImageTool.js"
+}

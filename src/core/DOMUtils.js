@@ -1,11 +1,5 @@
-/**
- * React Starter Kit (https://www.reactstarterkit.com/)
- *
- * Copyright © 2014-2016 Kriasoft, LLC. All rights reserved.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE.txt file in the root directory of this source tree.
- */
+import React from 'react';
+
 
 export function addEventListener(node, event, listener) {
   if (node.addEventListener) {
@@ -21,4 +15,20 @@ export function removeEventListener(node, event, listener) {
   } else {
     node.detachEvent(`on${event}`, listener);
   }
+}
+
+export function deepCopyElementWithStyleAndClassNameAndProps(element: React.Element, P: Object): React.Element {
+
+  if (P.style && element.props.style) {
+    P.style = {
+      ...element.props.style, ...P.style
+    }
+  }
+
+  if (P.className && element.props.className) {
+    P.className = `${element.props.className} ${P.className}`
+  }
+
+  return React.cloneElement(element, P)
+
 }
