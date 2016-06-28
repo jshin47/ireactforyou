@@ -6425,6 +6425,10 @@ module.exports =
   
   var _react2 = _interopRequireDefault(_react);
   
+  var _SandboxPage = __webpack_require__(130);
+  
+  var _SandboxPage2 = _interopRequireDefault(_SandboxPage);
+  
   var _Sandbox = __webpack_require__(126);
   
   var _Sandbox2 = _interopRequireDefault(_Sandbox);
@@ -6442,7 +6446,7 @@ module.exports =
               title = 'Sandbox';
   
               state.context.onSetTitle(title);
-              return _context.abrupt('return', _react2.default.createElement(_Sandbox2.default, { title: title }));
+              return _context.abrupt('return', _react2.default.createElement(_SandboxPage2.default, { title: title }));
   
             case 3:
             case 'end':
@@ -6494,6 +6498,143 @@ module.exports =
       if (false) {
         module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]!./../../../node_modules/postcss-loader/index.js?parser=postcss-scss!./Sandbox.scss", function() {
           var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]!./../../../node_modules/postcss-loader/index.js?parser=postcss-scss!./Sandbox.scss");
+          if (typeof newContent === 'string') {
+            newContent = [[module.id, content, '']];
+          }
+          removeCss = insertCss(newContent, { replace: true });
+        });
+        module.hot.dispose(function() { removeCss(); });
+      }
+    
+
+/***/ },
+/* 130 */
+/***/ function(module, exports, __webpack_require__) {
+
+  'use strict';
+  
+  Object.defineProperty(exports, "__esModule", {
+    value: true
+  });
+  
+  var _getPrototypeOf = __webpack_require__(8);
+  
+  var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
+  
+  var _classCallCheck2 = __webpack_require__(9);
+  
+  var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
+  
+  var _createClass2 = __webpack_require__(10);
+  
+  var _createClass3 = _interopRequireDefault(_createClass2);
+  
+  var _possibleConstructorReturn2 = __webpack_require__(12);
+  
+  var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
+  
+  var _inherits2 = __webpack_require__(11);
+  
+  var _inherits3 = _interopRequireDefault(_inherits2);
+  
+  var _react = __webpack_require__(1);
+  
+  var _react2 = _interopRequireDefault(_react);
+  
+  var _withStyles = __webpack_require__(4);
+  
+  var _withStyles2 = _interopRequireDefault(_withStyles);
+  
+  var _SandboxPage = __webpack_require__(132);
+  
+  var _SandboxPage2 = _interopRequireDefault(_SandboxPage);
+  
+  function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+  
+  var SandboxPage = function (_Component) {
+    (0, _inherits3.default)(SandboxPage, _Component);
+  
+    function SandboxPage() {
+      (0, _classCallCheck3.default)(this, SandboxPage);
+      return (0, _possibleConstructorReturn3.default)(this, (0, _getPrototypeOf2.default)(SandboxPage).apply(this, arguments));
+    }
+  
+    (0, _createClass3.default)(SandboxPage, [{
+      key: 'componentWillMount',
+      value: function componentWillMount() {
+        this.context.onSetTitle(this.props.title);
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement(
+          'div',
+          { className: _SandboxPage2.default.root },
+          _react2.default.createElement(
+            'div',
+            { className: _SandboxPage2.default.container },
+            this.props.path === '/' ? null : _react2.default.createElement(
+              'h1',
+              null,
+              this.props.title
+            )
+          )
+        );
+      }
+    }]);
+    return SandboxPage;
+  }(_react.Component);
+  
+  SandboxPage.propTypes = {
+    path: _react.PropTypes.string.isRequired,
+    title: _react.PropTypes.string
+  };
+  SandboxPage.contextTypes = {
+    onSetTitle: _react.PropTypes.func.isRequired
+  };
+  exports.default = (0, _withStyles2.default)(SandboxPage, _SandboxPage2.default);
+
+/***/ },
+/* 131 */
+/***/ function(module, exports, __webpack_require__) {
+
+  exports = module.exports = __webpack_require__(2)();
+  // imports
+  
+  
+  // module
+  exports.push([module.id, "/*\r\n * Colors\r\n * ========================================================================== */\r\n\r\n/* #222 */\r\n\r\n/* #404040 */\r\n\r\n/* #555 */\r\n\r\n/* #777 */\r\n\r\n/* #eee */\r\n\r\n/*\r\n * Typography\r\n * ========================================================================== */\r\n\r\n/*\r\n * Layout\r\n * ========================================================================== */\r\n\r\n/*\r\n * Media queries breakpoints\r\n * ========================================================================== */\r\n\r\n/* Extra small screen / phone */\r\n\r\n/* Small screen / tablet */\r\n\r\n/* Medium screen / desktop */\r\n\r\n/* Large screen / wide desktop */\r\n\r\n/*\r\n * Animations\r\n * ========================================================================== */\r\n\r\n.SandboxPage_root_1Ip {\n\n}\r\n\r\n.SandboxPage_container_eqw {\n  margin: 0 auto;\n  padding: 0 0 40px;\n  max-width: 1000px;\n}\n", "", {"version":3,"sources":["/./src/components/variables.scss","/./src/components/SandboxPage/SandboxPage.scss"],"names":[],"mappings":"AAAA;;gFAEgF;;AAGxB,UAAU;;AACV,aAAa;;AACb,UAAU;;AACV,UAAU;;AACV,UAAU;;AAElE;;gFAEgF;;AAIhF;;gFAEgF;;AAIhF;;gFAEgF;;AAEhD,gCAAgC;;AAChC,2BAA2B;;AAC3B,6BAA6B;;AAC7B,iCAAiC;;AAEjE;;gFAEgF;;AC/BhF;;CAEC;;AAED;EACE,eAAe;EACf,kBAAkB;EAClB,kBAA8B;CAC/B","file":"SandboxPage.scss","sourcesContent":["/*\r\n * Colors\r\n * ========================================================================== */\r\n\r\n$white-base:            hsl(255, 255, 255);\r\n$gray-darker:           color(black lightness(+13.5%)); /* #222 */\r\n$gray-dark:             color(black lightness(+25%));   /* #404040 */\r\n$gray:                  color(black lightness(+33.5%)); /* #555 */\r\n$gray-light:            color(black lightness(+46.7%)); /* #777 */\r\n$gray-lighter:          color(black lightness(+93.5%)); /* #eee */\r\n\r\n/*\r\n * Typography\r\n * ========================================================================== */\r\n\r\n$font-family-base:      'Segoe UI', 'HelveticaNeue-Light', sans-serif;\r\n\r\n/*\r\n * Layout\r\n * ========================================================================== */\r\n\r\n$max-content-width:     1000px;\r\n\r\n/*\r\n * Media queries breakpoints\r\n * ========================================================================== */\r\n\r\n$screen-xs-min:         480px;  /* Extra small screen / phone */\r\n$screen-sm-min:         768px;  /* Small screen / tablet */\r\n$screen-md-min:         992px;  /* Medium screen / desktop */\r\n$screen-lg-min:         1200px; /* Large screen / wide desktop */\r\n\r\n/*\r\n * Animations\r\n * ========================================================================== */\r\n\r\n$animation-swift-out:   .45s cubic-bezier(0.3, 1, 0.4, 1) 0s;\r\n","\n@import '../variables.scss';\n\n.root {\n\n}\n\n.container {\n  margin: 0 auto;\n  padding: 0 0 40px;\n  max-width: $max-content-width;\n}\n"],"sourceRoot":"webpack://"}]);
+  
+  // exports
+  exports.locals = {
+  	"root": "SandboxPage_root_1Ip",
+  	"container": "SandboxPage_container_eqw"
+  };
+
+/***/ },
+/* 132 */
+/***/ function(module, exports, __webpack_require__) {
+
+  
+      var content = __webpack_require__(131);
+      var insertCss = __webpack_require__(3);
+  
+      if (typeof content === 'string') {
+        content = [[module.id, content, '']];
+      }
+  
+      module.exports = content.locals || {};
+      module.exports._getCss = function() { return content.toString(); };
+      module.exports._insertCss = insertCss.bind(null, content);
+    
+      var removeCss = function() {};
+  
+      // Hot Module Replacement
+      // https://webpack.github.io/docs/hot-module-replacement
+      // Only activated in browser context
+      if (false) {
+        module.hot.accept("!!./../../../node_modules/css-loader/index.js?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]!./../../../node_modules/postcss-loader/index.js?parser=postcss-scss!./SandboxPage.scss", function() {
+          var newContent = require("!!./../../../node_modules/css-loader/index.js?sourceMap&modules&localIdentName=[name]_[local]_[hash:base64:3]!./../../../node_modules/postcss-loader/index.js?parser=postcss-scss!./SandboxPage.scss");
           if (typeof newContent === 'string') {
             newContent = [[module.id, content, '']];
           }

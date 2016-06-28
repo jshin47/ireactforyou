@@ -7,11 +7,11 @@ class SandboxPage extends Component {
   static propTypes = {
     path: PropTypes.string.isRequired,
     title: PropTypes.string,
-  };
+  }
 
   static contextTypes = {
     onSetTitle: PropTypes.func.isRequired,
-  };
+  }
 
   componentWillMount() {
     this.context.onSetTitle(this.props.title);
@@ -24,9 +24,9 @@ class SandboxPage extends Component {
           {this.props.path === '/' ? null : <h1>{this.props.title}</h1>}
         </div>
       </div>
-    );
+    )
   }
 
 }
 
-export default withStyles(SandboxPage, s);
+export default withStyles(SandboxPage, s)
