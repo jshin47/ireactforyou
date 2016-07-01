@@ -1,3 +1,13 @@
-/**
- * Created by justin on 7/1/16.
- */
+import React from 'react'
+
+export default class ImageEditorToolingPane extends React.Component {
+
+  render () {
+
+    return (
+      <div>test</div>
+    )
+
+  }
+
+}

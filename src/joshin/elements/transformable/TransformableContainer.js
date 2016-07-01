@@ -1,5 +1,4 @@
-import React from 'react'
-import * as decor from '../../infrastructure/decorator/'
+import React, {Component, PropTypes} from 'react'
 
 function pow2abs(a, b) {
   return Math.pow(Math.abs(a - b), 2);
@@ -29,9 +28,9 @@ export function angle(touches) {
   return deg;
 }
 
-export const TransformableLogic = {
+export class TransformableLogic extends React.Component {
 
-  resetIVARS: () => {
+  resetIVARS = () => {
     this._panResponder = {}
     this.panListener = null
     this.currentPanValue = { x: 0, y: 0 }
@@ -51,9 +50,9 @@ export const TransformableLogic = {
     this._updateSize = ::this._updateSize
     this._checkAdjustment = ::this._checkAdjustment
     this._updatePanState = ::this._updatePanState
-  },
+  }
 
-  componentWillMount: () => {
+  componentWillMount = () => {
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: () => !this.state.animating,
       onMoveShouldSetPanResponder: () => !this.state.animating,
@@ -61,19 +60,19 @@ export const TransformableLogic = {
       onPanResponderRelease: this._handlePanResponderEnd,
       onPanResponderTerminate: this._handlePanResponderEnd,
     })
-  },
+  }
 
-  componentDidMount: () => {
+  componentDidMount = () => {
     this.panListener = this.state.pan.addListener((value) => this.currentPanValue = value)
     this.sizeListener = this.state.size.addListener((value) => this.currentSizeValue = value)
     this.angleListener = this.state.angle.addListener((value) => this.currentAngleValue = value)
-  },
+  }
 
-  componentWillUnmount: () => {
+  componentWillUnmount = () => {
     this.state.pan.removeListener(this.panListener)
     this.state.size.removeListener(this.sizeListener)
     this.state.angle.removeListener(this.angleListener)
-  },
+  }
 
   _updatePosition(x, y) {
     this.setState({ animating: true })
@@ -84,7 +83,7 @@ export const TransformableLogic = {
         duration: 250
       }
     ).start(() => this._updatePanState())
-  },
+  }
 
   _updateSize(x, y) {
     this.setState({ animating: true })
@@ -100,15 +99,15 @@ export const TransformableLogic = {
       this._imageHeight = this.currentSizeValue.y
       this._checkAdjustment()
     })
-  },
+  }
 
   _updatePanState(x = this.currentPanValue.x, y = this.currentPanValue.y) {
     this.state.pan.setOffset({ x, y })
     this.state.pan.setValue({ x: 0, y: 0 })
     this.setState({ animating: false })
-  },
+  }
 
-  _handlePanResponderMove: (e, gestureState) => {
+  _handlePanResponderMove = (e, gestureState) => {
     if (gestureState.numberActiveTouches === 1 && !this._multiTouch) {
       const move = Animated.event([
         null, { dx: this.state.pan.x, dy: this.state.pan.y }
@@ -132,9 +131,9 @@ export const TransformableLogic = {
       this.state.size.setValue({ x: newWidth, y: newHeight })
     }
     return null
-  },
+  }
 
-  _handlePanResponderEnd: () => {
+  _handlePanResponderEnd = () => {
     this._updatePanState()
     if (this._multiTouch) {
       this._imageWidth = this.currentSizeValue.x
@@ -154,7 +153,7 @@ export const TransformableLogic = {
     } else {
       this._checkAdjustment()
     }
-  },
+  }
 
   _checkAdjustment() {
     const positionUpdate = { x: 0, y: 0 }
@@ -175,9 +174,9 @@ export const TransformableLogic = {
       positionUpdate.x = -imageLeft
     }
     this._updatePosition(positionUpdate.x, positionUpdate.y)
-  },
+  }
 
-  render: () => {
+  render = () => {
     const { pan, size } = this.state
     const {
       imageContainerWidth,
@@ -224,8 +223,7 @@ export const TransformableLogic = {
 
 }
 
-@decor.multiInherit(TransformableLogic, React.Component)
-export default class TransformableContainer {
+export default class TransformableContainer extends TransformableLogic {
 
   static propTypes = {
     imageHeight: PropTypes.number.isRequired,
@@ -240,23 +238,11 @@ export default class TransformableContainer {
   }
 
   static defaultProps = {
-    maskWidth: width,
-    maskHeight: height,
+    maskWidth: 500, // window.clientWidth,
+    maskHeight: 500, // window.clientHeight,
     maskPadding: 0,
-    imageContainerWidth: width,
-    imageContainerHeight: height,
-  }
-
-  static defaultProps = {
-    maskBounds: {
-      width: Wndw.width,
-      height: Wndw.height
-    },
-    maskPadding: 0,
-    containerBounds: {
-      width: Wndw.width,
-      height: Wndw.height
-    }
+    imageContainerWidth: 500,
+    imageContainerHeight: 500,
   }
 
   constructor(props, context) {

@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import {AppBar, Card, Badge, Toolbar, GridList, Menu, MenuItem, Step, StepButton, Stepper, StepContent} from './../../../../node_modules/material-ui/'
 import ReactDnd from 'react-dnd'
 import _ from 'lodash';
+import ImageEditorPane from './ImageEditorPane'
+import ImageEditorToolingPane from './ImageEditorToolingPane'
 import {Responsive, WidthProvider} from 'react-grid-layout';
 const ResponsiveReactGridLayout = WidthProvider(Responsive);
 
@@ -28,8 +30,7 @@ export default class ImageEditingLayout extends React.Component {
     className: 'img-edit-layout',
     rowHeight: 45,
     cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
-    useCSSTransforms: this.state.mounted,
-    onBreakpointChange: this.onBreakpointChange,
+    useCSSTransforms: true,
     layouts: {
       lg: [
         {
@@ -58,16 +59,16 @@ export default class ImageEditingLayout extends React.Component {
 
   render = () => {
 
-    const { WidthProvider, Responsive, ...rest } = RGL
-
-    WidthProvider.
+    // onBreakpointChange ={this.onBreakpointChange}
 
     return (
-      <ResponsiveReactGridLayout
-        {...this.props}
-      >
+      <div>
+        <ResponsiveReactGridLayout {...this.props}>
+          <ImageEditorPane key='main' ></ImageEditorPane>
+          <ImageEditorToolingPane key='side'></ImageEditorToolingPane>
+        </ResponsiveReactGridLayout>
+      </div>
 
-      </ResponsiveReactGridLayout>
     )
   }
 
