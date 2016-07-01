@@ -1,6 +1,0 @@
-{
-  "name": "DragToResize",
-  "version": "0.0.0",
-  "private": true,
-  "main": "./DragToResize.js"
-}

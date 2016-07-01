@@ -32,3 +32,14 @@ export function deepCopyElementWithStyleAndClassNameAndProps(element: React.Elem
   return React.cloneElement(element, P)
 
 }
+
+
+export function cloneElement(element: React.Element, props: Object): React.Element {
+  if (props.style && element.props.style) {
+    props.style = {...element.props.style, ...props.style};
+  }
+  if (props.className && element.props.className) {
+    props.className = `${element.props.className} ${props.className}`;
+  }
+  return React.cloneElement(element, props);
+};
