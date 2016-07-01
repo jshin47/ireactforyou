@@ -1,5 +1,10 @@
 So I want to show how to accomplish the basic task very easily, an image resizer.
 
-For now let's assume that it is driven form inputs. But before that we need to worry about: state.
+I will do so in these 'slides' also programmed today for this very task.
 
-I will define a component ImageEditor
+The input files are '.slide' files and displaying slides is the first task to accomplish.
+
+First, we will need a way to upload slides.
+
+To get into the "admin" portion we'll require a sort of secret, a mouse movement that is unusual.
+

@@ -8,27 +8,17 @@ import * as saga from 'redux-saga'
 import ReactMotion from 'react-motion'
 import ReactMotionUi from 'react-motion-ui-pack'
 import ReactTransitionGroup from 'react-addons-transition-group'
-import { Card } from 'material-ui/Card/Card'
+import { IconButton, SvgIcon, FontIcon, IconMenu } from 'material-ui'
 
-import * as live from '../../actions/live'
 
-export default class EditableContent<M> extends Component {
-  
-  static propTypes = M
-  
-  
-  
+class Resizable extends Component {
+
   render () {
-    
+
     return (
-      
-      
-      
+      <IconButton>zoom-out map</IconButton>
     )
-    
+
   }
-  
+
 }
-
-
-// class ComponentTemplate extends Component
