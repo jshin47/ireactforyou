@@ -1,0 +1,5 @@
+So I want to show how to accomplish the basic task very easily, an image resizer.
+
+For now let's assume that it is driven form inputs. But before that we need to worry about: state.
+
+I will define a component ImageEditor
