@@ -12,7 +12,7 @@ export default class ImageEditingLayout extends React.Component {
     super (P, X)
 
     this.state = {
-      bkpt: 'lg'
+      currentBreakpoint: 'lg'
     }
   }
 
@@ -28,7 +28,8 @@ export default class ImageEditingLayout extends React.Component {
     className: 'img-edit-layout',
     rowHeight: 45,
     cols: {lg: 12, md: 10, sm: 6, xs: 4, xxs: 2},
-    useCSSTransforms: {this.state.mounted},
+    useCSSTransforms: this.state.mounted,
+    onBreakpointChange: this.onBreakpointChange,
     layouts: {
       lg: [
         {
@@ -47,6 +48,12 @@ export default class ImageEditingLayout extends React.Component {
         }
       ]
     }
+  }
+
+  onBreakpointChange = (newBkpt) => {
+    this.setState({
+      currentBreakpoint: newBkpt
+    })
   }
 
   render = () => {
